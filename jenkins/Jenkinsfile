@@ -68,7 +68,7 @@ pipeline {
 
                    
                    // def checkScumTxt = httpRequest "http://34.93.191.143:8081/repository/OPTIMUM/net/java/cargo-tracker/1.0-SNAPSHOT/cargo-tracker-1.0-20210628.075353-4.pom.md5"
-                    def get = new URL("http://34.93.191.143:8081/repository/OPTIMUM/net/java/cargo-tracker/1.0-SNAPSHOT/cargo-tracker-1.0-20210628.075353-4.pom.md5").openConnection();
+                    def get = new URL("http://34.93.191.143:8081/repository/OPTIMUM/net/java/cargo-tracker/1.0-SNAPSHOT/cargo-tracker-1.0-20210628.075353-4.pom.md5/get").openConnection();
                     def getRC = get.getResponseCode();
                     println(getRC);
                     if(getRC.equals(200)) {
