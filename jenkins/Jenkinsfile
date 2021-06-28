@@ -92,5 +92,5 @@ pipeline {
                 archiveArtifacts artifacts: 'artifact.txt', onlyIfSuccessful: true
         }
     }
-    }
+   
 }
