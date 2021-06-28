@@ -13,7 +13,7 @@ pipeline {
         NEXUS_CREDENTIAL_ID = "jenkins-user-id"
     }
     stages {
-        stage("Clone code from VCS") {
+        stage("Clone code from Github") {
             steps {
                 script {
                     git  'https://github.com/javaee/cargotracker.git';
@@ -62,5 +62,35 @@ pipeline {
                 }
             }
         }
+         stage('Generate Artifact') {
+            steps {
+                script {
+
+
+                    //   curl -s "http://10.148.0.6:8081/nexus/service/local/artifact/maven/resolve?g=com.web.netj&a=demoj&v=${params.projVersion}&r=demo" | xmllint --xpath "///sha1/text()"
+                   // def checkScumTxt =httpRequest "http://10.148.0.6:8081/service/rest/v1/search/assets/download?repository=demo&sort=version&maven.groupId=com.web.net&maven.artifactId=demo&maven.baseVersion=${params.projVersion}&maven.extension=jar.sha1&maven.classifier="
+                   
+                   def checkScumTxt =httpRequest http://34.93.191.143:8081/repository/OPTIMUM/net/java/cargo-tracker/1.0-SNAPSHOT/cargo-tracker-1.0-20210625.091421-2.war
+                    sh "echo '{ \"groupId\":\"${pom.groupId}\"' > artifact.txt"
+                    sh "echo ',\"checksum\":\"${checkScumTxt.content}\"' >> artifact.txt"
+                    sh "echo ',\"artifactId\":\"${pom.artifactId}\"' >> artifact.txt"
+                    sh "echo ',\"Database\":\"${NEXUS_REPOSITORY}\"' >> artifact.txt"
+                    sh "echo ',\"version\":\"${pom.version}\" }' >> artifact.txt"
+                   /* sh "echo '{ \"group\":\"com.web.net\"' > artifact.txt"
+                    sh "echo ',\"checksum\":\"${checkScumTxt.content}\"' >> artifact.txt"
+                    sh "echo ',\"artifact\":\"demo\"' >> artifact.txt"
+                    sh "echo ',\"database\":\"yes\"' >> artifact.txt"
+                    sh "echo ',\"version\":\"${params.projVersion}\" }' >> artifact.txt"
+                    */
+
+                }
+            }
+        }
+    }
+    post {
+        always {
+                archiveArtifacts artifacts: 'artifact.txt', onlyIfSuccessful: true
+        }
+    }
     }
 }
