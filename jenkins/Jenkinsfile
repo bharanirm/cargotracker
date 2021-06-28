@@ -62,7 +62,7 @@ pipeline {
                 }
             }
         }
-         stage('Generate Artifact') {
+      /*   stage('Generate Artifact') {
             steps {
                 script {
 
@@ -76,12 +76,7 @@ pipeline {
                     sh "echo ',\"artifactId\":\"${pom.artifactId}\"' >> artifact.txt"
                     sh "echo ',\"Database\":\"${NEXUS_REPOSITORY}\"' >> artifact.txt"
                     sh "echo ',\"version\":\"${pom.version}\" }' >> artifact.txt"
-                   /* sh "echo '{ \"group\":\"com.web.net\"' > artifact.txt"
-                    sh "echo ',\"checksum\":\"${checkScumTxt.content}\"' >> artifact.txt"
-                    sh "echo ',\"artifact\":\"demo\"' >> artifact.txt"
-                    sh "echo ',\"database\":\"yes\"' >> artifact.txt"
-                    sh "echo ',\"version\":\"${params.projVersion}\" }' >> artifact.txt"
-                    */
+                   
 
                 }
             }
@@ -91,6 +86,6 @@ pipeline {
         always {
                 archiveArtifacts artifacts: 'artifact.txt', onlyIfSuccessful: true
         }
-    }
+    } */
    
 }
