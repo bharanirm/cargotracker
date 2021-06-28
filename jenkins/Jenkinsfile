@@ -75,7 +75,7 @@ pipeline {
                     println(get.getInputStream().getText()); 
                     } */
 
-                    def checkScumTxt = httpRequest "http://34.93.191.143:8081/service/rest/v1/search/assets/download?repository=OPTIMUM&sort=version&maven.groupId=net.java&maven.artifactId=OPTIMUM&maven.baseVersion=${params.projVersion}&maven.extension=jar.sha1&maven.classifier="
+                    def checkScumTxt = httpRequest "http://34.93.191.143:8081/service/ret/v1/search?repository=OPTIMUM&sort=verion&maven.groupId=net.java&maven.artifactId=cargo-tracker&maven.extension=war.sha1&maven.classifier="
                     sh "echo '{\"groupId\":\"${pom.groupId}\"' > artifact.txt"
                     sh "echo ',\"checksum\":\"${checkScumTxt.content}\"' >> artifact.txt"
                     sh "echo ',\"artifactId\":\"${pom.artifactId}\"' >> artifact.txt"
