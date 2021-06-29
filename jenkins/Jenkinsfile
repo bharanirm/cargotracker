@@ -79,7 +79,7 @@ pipeline {
                  //  def checkScumTxt = httpRequest "http://34.93.102.235:8081/repository/OPTIMUM/net/java/cargo-tracker/1.0-SNAPSHOT/cargo-tracker-1.0-20210628.092429-10.war.sha1"
                    
                    //   def response = httpRequest "http://34.93.102.235:8081/service/rest/v1/search/assets?group=net.java&name=cargo-tracker&maven.baseVersion=${pom.version}&maven.extension=war&maven.classifier="
-                  def response = httpRequest 'http://34.93.102.235:8081/servic/rest/v1/search/assets?group=net.java&name=cargo-tracker&version=1.0-20210629.025925-11&maven.extension=war.sha1&maven.classifier='
+                  def response = httpRequest 'http://34.93.102.235:8081/service/rest/v1/search/assets?group=net.java&name=cargo-tracker&version=1.0-20210629.025925-11&maven.extension=war.sha1&maven.classifier='
                     println("Status: "+response.status)
                    println("Content: "+response.content)
                     sh "echo '{\"groupId\":\"${pom.groupId}\"' > artifact.txt"
