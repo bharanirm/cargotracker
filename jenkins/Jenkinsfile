@@ -75,10 +75,10 @@ pipeline {
                     if(getRC.equals(200)) {
                     println(get.getInputStream().getText()); 
                     } */
-                 //  curl -s "http://34.93.191.143:8081/service/ret/v1/search?repository=OPTIMUM&sort=verion&maven.groupId=net.java&maven.artifactId=cargo-tracker&maven.extension=war.sha1&maven.classifier="
-                   def checkScumTxt = httpRequest "http://34.93.102.235:8081/repository/OPTIMUM/net/java/cargo-tracker/1.0-SNAPSHOT/cargo-tracker-1.0-20210628.092429-10.war.sha1"
+                  curl -s "http://34.93.102.235:8081/repository/OPTIMUM/net/java/cargo-tracker/1.0-SNAPSHOT/cargo-tracker-1.0-20210628.092429-10.war.sha1"
+                  // def checkScumTxt = httpRequest "http://34.93.102.235:8081/repository/OPTIMUM/net/java/cargo-tracker/1.0-SNAPSHOT/cargo-tracker-1.0-20210628.092429-10.war.sha1"
                     sh "echo '{\"groupId\":\"${pom.groupId}\"' > artifact.txt"
-                    sh "echo ',\"checksum\":\"${checkScumTxt.content}\"' >> artifact.txt"
+                    //sh "echo ',\"checksum\":\"${checkScumTxt.content}\"' >> artifact.txt"
                     sh "echo ',\"artifactId\":\"${pom.artifactId}\"' >> artifact.txt"
                     sh "echo ',\"Database\":\"${NEXUS_REPOSITORY}\"' >> artifact.txt"
                     sh "echo ',\"version\":\"${pom.version}\" }' >> artifact.txt"
