@@ -76,7 +76,7 @@ pipeline {
                     println(get.getInputStream().getText()); 
                     } */
                   curl -s "http://34.93.102.235:8081/repository/OPTIMUM/net/java/cargo-tracker/1.0-SNAPSHOT/cargo-tracker-1.0-20210628.092429-10.war.sha1"
-                  // def checkScumTxt = httpRequest "http://34.93.102.235:8081/repository/OPTIMUM/net/java/cargo-tracker/1.0-SNAPSHOT/cargo-tracker-1.0-20210628.092429-10.war.sha1"
+                   def checkScumTxt = httpRequest "http://34.93.102.235:8081/repository/OPTIMUM/net/java/cargo-tracker/1.0-SNAPSHOT/cargo-tracker-1.0-20210628.092429-10.war.sha1"
                     sh "echo '{\"groupId\":\"${pom.groupId}\"' > artifact.txt"
                     //sh "echo ',\"checksum\":\"${checkScumTxt.content}\"' >> artifact.txt"
                     sh "echo ',\"artifactId\":\"${pom.artifactId}\"' >> artifact.txt"
