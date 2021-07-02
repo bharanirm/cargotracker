@@ -3,6 +3,9 @@ pipeline {
     agent {
         label "master"
     }
+    parameters {
+        string(name: 'artifactVer', defaultValue: '1.0-20210629.095654-21', description: 'Artfact Version')
+    }
     tools {
         maven "Maven"
     }
@@ -80,12 +83,12 @@ pipeline {
                    
                    //   def response = httpRequest "http://34.93.102.235:8081/service/rest/v1/search/assets?group=net.java&name=cargo-tracker&maven.baseVersion=${pom.version}&maven.extension=war&maven.classifier="
                   //def response = httpRequest 'http://34.93.102.235:8081/service/rest/v1/search/assets?group=net.java&name=cargo-tracker&version=1.0-20210629.025925-11&maven.extension=war.sha1&maven.classifier='
-                  def response = httpRequest 'http://34.93.102.235:8081/service/rest/v1/search/assets?group=net.java&name=cargo-tracker&maven.extension=war.sha1&maven.classifier='
-
+                  
+                    def response = httpRequest 'http://34.93.191.143:8081/service/rest/v1/search/assets?group=net.java&name=cargo-tracker&maven.extension=war.sha1&maven.classifier='
                     println("Status: "+response.status)
-                   println("Content: "+response.content)
+                    println("Content: "+response.content)
                     sh "echo '{\"groupId\":\"${pom.groupId}\"' > artifact.txt"
-                   sh "echo ',\"checksum\":\"${response.content}\"' >> artifact.txt"
+                    sh "echo ',\"checksum\":\"${response.content}\"' >> artifact.txt"
                     sh "echo ',\"artifactId\":\"${pom.artifactId}\"' >> artifact.txt"
                     sh "echo ',\"Database\":\"${NEXUS_REPOSITORY}\"' >> artifact.txt"
                     sh "echo ',\"version\":\"${pom.version}\" }' >> artifact.txt"
