@@ -12,7 +12,7 @@ pipeline {
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "34.135.65.236:8081"
+        NEXUS_URL = "34.93.102.235:8081"
         NEXUS_REPOSITORY = "OPTIMUM"
         NEXUS_CREDENTIAL_ID = "jenkins-user-id"
     }
@@ -85,7 +85,7 @@ pipeline {
                    //   def response = httpRequest "http://34.93.102.235:8081/service/rest/v1/search/assets?group=net.java&name=cargo-tracker&maven.baseVersion=${pom.version}&maven.extension=war&maven.classifier="
                   //def response = httpRequest 'http://34.93.102.235:8081/service/rest/v1/search/assets?group=net.java&name=cargo-tracker&version=1.0-20210629.025925-11&maven.extension=war.sha1&maven.classifier='
                   
-                    def response = httpRequest 'http://34.135.65.236:8081/service/rest/v1/search/assets?group=net.java&name=cargo-tracker&maven.extension=war.sha1&maven.classifier='
+                    def response = httpRequest 'http://34.93.102.235:8081/service/rest/v1/search/assets?group=net.java&name=cargo-tracker&maven.extension=war.sha1&maven.classifier='
                     println("Status: "+response.status)
                     println("Content: "+response.content)
                     sh "echo '{\"groupId\":\"${pom.groupId}\"' > artifact.txt"
